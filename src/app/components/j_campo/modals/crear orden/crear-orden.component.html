@@ -6,7 +6,11 @@
         <div class="card-body parcelas">
           <div class="card-title d-flex">
             <img src="/Parcela-Icon1.svg" alt="Parcela Icon" class="img-fluid me-2" />
-            <h3>Parcela: {{ parcelaSeleccionada?.nombre || 'No seleccionada' }}</h3>
+           <h2 class="fw-semibold"> Parcela</h2>
+            @for (parcela of parcelaSeleccionada; track parcela.id){
+
+              {{ parcela.nombre }}
+              }
           </div>
           <app-modal-crear-parcela #modalVerParcelas
             (parcelaGuardada)="recibirParcela($event)"></app-modal-crear-parcela>

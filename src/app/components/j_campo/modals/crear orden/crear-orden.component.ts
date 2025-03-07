@@ -56,8 +56,6 @@ export class CrearOrdenComponent{
 recibirParcela(parcela: Parcela) {
   console.log('Recibido en el padre:', parcela);  // Verifica el objeto recibido
   this.parcelaSeleccionada = parcela;
-
-  console.log(this.parcelaSeleccionada)
 }
 
 

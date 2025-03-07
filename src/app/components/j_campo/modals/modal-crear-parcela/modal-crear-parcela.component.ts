@@ -14,7 +14,7 @@ import { Parcela } from '../../../../models/Parcela';
 export class ModalCrearParcelaComponent implements OnInit {
   isVisible = false; // Controla la visibilidad del modal
   parcelas: Parcela[] = [];
-  parcelaSeleecionada: any = null;  // Inicializado a null o un objeto vacío
+  parcelaSeleccionada: any = [];  // Inicializado a null o un objeto vacío
 
   @ViewChild('modalElement') modalElement!: ElementRef;
   @Output() parcelaGuardada = new EventEmitter<Parcela>();  // Emite el tratamiento seleccionado al padre
@@ -31,6 +31,15 @@ export class ModalCrearParcelaComponent implements OnInit {
         console.error('Error al obtener usuarios', error);
       }
     );
+  }
+
+  revisarParcelas(parcela: any) {
+    const index = this.parcelaSeleccionada.indexOf(parcela);
+    if (index === -1) {
+      this.parcelaSeleccionada.push(parcela); // Lo agrega si no está
+    } else {
+      this.parcelaSeleccionada.splice(index, 1); // Lo quita si ya está
+    }
   }
 
 
@@ -52,8 +61,8 @@ export class ModalCrearParcelaComponent implements OnInit {
 
   // Guardar cambios y emitir el tratamiento seleccionado
   guardarCambios() {
-    console.log('Emitiendo:', this.parcelaSeleecionada);  // Verifica el objeto completo
-    this.parcelaGuardada.emit(this.parcelaSeleecionada);
+    console.log('Emitiendo:', this.parcelaSeleccionada);  // Verifica el objeto completo
+    this.parcelaGuardada.emit(this.parcelaSeleccionada);
     this.cerrarModal();
   }
   }
